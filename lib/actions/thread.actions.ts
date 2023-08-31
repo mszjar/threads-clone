@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { revalidatePath } from "next/cache";
 import Thread from "../models/thread.model";
@@ -133,6 +133,8 @@ export async function addCommentToThread(
 
     // save the original thread
     await originalThread.save();
+
+    revalidatePath(path);
 
   } catch (error: any) {
     throw new Error(`Failed to add comment to thread: ${error.message}`);
